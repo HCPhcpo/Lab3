@@ -1,0 +1,52 @@
+struct ElementFrequency {
+    int element;
+    int frequency;
+    int firstIndex; // Stores the first occurrence of the element in the array
+};
+
+// Comparison function to sort primarily by frequency (descending) and secondarily by first occurrence (ascending)
+bool compare(const ElementFrequency& a, const ElementFrequency& b) {
+    if (a.frequency == b.frequency) {
+        return a.firstIndex < b.firstIndex; // Keep the original order if frequencies are the same
+    }
+    return a.frequency > b.frequency; // Sort by frequency in descending order
+}
+
+void sortByFrequency(int arr[], int n) {
+    std::vector<ElementFrequency> frequencyCount;
+
+    // Count frequency and record first occurrence index
+    for (int i = 0; i < n; i++) {
+        int element = arr[i];
+        bool found = false;
+
+        // Check if the element is already in the frequencyCount vector
+        for (unsigned int j = 0; j < frequencyCount.size(); j++) {
+            if (frequencyCount[j].element == element) {
+                frequencyCount[j].frequency++;
+                found = true;
+                break;
+            }
+        }
+
+        // If element is not found, add it with frequency 1 and its first occurrence index
+        if (!found) {
+            ElementFrequency ef;
+            ef.element = element;
+            ef.frequency = 1;
+            ef.firstIndex = i; // Store the index of the first occurrence
+            frequencyCount.push_back(ef);
+        }
+    }
+
+    // Sort by frequency (descending) and by first occurrence index (ascending)
+    std::sort(frequencyCount.begin(), frequencyCount.end(), compare);
+
+    // Refill the original array based on sorted frequencies
+    int index = 0;
+    for (const auto& ef : frequencyCount) {
+        for (int j = 0; j < ef.frequency; j++) {
+            arr[index++] = ef.element;
+        }
+    }
+}

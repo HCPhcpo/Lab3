@@ -1,0 +1,18 @@
+V& get(K key) {
+    // Calculate the index using the hash function
+    int index = hashFunction(key, capacity);
+    
+    // Access and traverse the linked list at that index
+    Entry* current = table[index];
+    
+    while (current != nullptr) {
+        // If the current entry's key matches, return its value
+        if (current->key == key) {
+            return current->value;
+        }
+        current = current->next;
+    }
+    
+    // If not found, throw an exception
+    throw std::out_of_range("Key not found");
+}

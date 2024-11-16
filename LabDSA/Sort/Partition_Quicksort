@@ -1,0 +1,34 @@
+static T* Partition(T* start, T* end) {
+    if (start == end) {
+        return start;
+    }
+    int count = end - start + 1;
+    int i = 1;
+    int j = count - 1;
+
+    // Modify condition to sort in ascending order
+    while (i <= j) {
+        while (start[i] < start[0] && i <= j) {
+            i++;
+        }
+        while (start[j] > start[0] && j >= 1) {
+            j--;
+        }
+        if (i < j) {
+            swap(start[i], start[j]);
+            i++;
+            j--;
+        }
+    }
+    swap(start[0], start[j]);
+    return start + j;
+}
+
+static void QuickSort(T* start, T* end) {
+    if (end - start > 0) {
+        T *pivot = Partition(start, end - 1);
+        cout << pivot - start << " ";  // Print the pivot index relative to the current subarray
+        QuickSort(start, pivot);
+        QuickSort(pivot + 1, end);
+    }
+}
