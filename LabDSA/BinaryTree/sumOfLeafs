@@ -1,0 +1,7 @@
+int sumOfLeafsRec(Node* root){
+    if(root == NULL) return 0;
+    else if(root->pLeft == NULL && root->pRight == NULL) return root->value;
+    return sumOfLeafsRec(root->pLeft) + sumOfLeafsRec(root->pRight);
+}
+
+int sumOfLeafs(){return sumOfLeafsRec(root);}

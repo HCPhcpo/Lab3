@@ -1,0 +1,8 @@
+int countTwoChildrenNodeREC(Node* root){
+    if(root == nullptr) return 0; 
+    else if(root->pLeft != nullptr && root->pRight != nullptr) return 1+ countTwoChildrenNodeREC(root->pLeft) + countTwoChildrenNodeREC(root->pRight);
+    return  countTwoChildrenNodeREC(root->pLeft) + countTwoChildrenNodeREC(root->pLeft);
+} 
+int countTwoChildrenNode(){
+    return countTwoChildrenNodeREC(root);
+}

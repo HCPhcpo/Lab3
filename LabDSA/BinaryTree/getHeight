@@ -1,0 +1,41 @@
+int getHeightRec(Node* root) {
+    if(root == NULL) return 0;
+    return 1 + max( getHeightRec(root->pLeft), getHeightRec(root->pRight));
+}
+int getHeight() {return  getHeightRec(root);}
+
+    //* Prefix
+void preOrderRec(Node* root, string & result) {
+    if(root == NULL) return;
+    result += to_string(root->value) + " ";
+    preOrderRec(root->pLeft,result);
+    preOrderRec(root->pRight,result);
+}
+string preOrder() {
+    string result;
+    preOrderRec(root,result);
+    return result;
+}
+void inOrderRec(Node* root, string & result) {
+    if(root == NULL) return;
+    inOrderRec(root->pLeft,result);
+    result += to_string(root->value) + " ";
+    inOrderRec(root->pRight,result);
+}
+string inOrder() {
+    string result;
+    inOrderRec(root,result);
+    return result;
+}
+
+void postOrderRec(Node* root, string & result) {
+    if(root == NULL) return;
+     postOrderRec(root->pLeft,result);
+     postOrderRec(root->pRight,result);
+      result += to_string(root->value) + " ";
+}
+string  postOrder() {
+    string result;
+    postOrderRec(root,result);
+    return result;
+}

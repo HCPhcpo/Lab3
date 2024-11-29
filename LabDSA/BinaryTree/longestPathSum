@@ -1,0 +1,21 @@
+int longestPathSumUtil(BTNode* root, int& maxLen) {
+    if (root == nullptr) {
+        maxLen = 0;
+        return 0;
+    }
+
+    int leftMaxLen, rightMaxLen; // độ dài
+    int leftSum = longestPathSumUtil(root->left, leftMaxLen); // tổng
+    int rightSum = longestPathSumUtil(root->right, rightMaxLen); // tổng
+
+    maxLen = max(leftMaxLen, rightMaxLen) + 1;
+
+    if (leftMaxLen == rightMaxLen)     return max(leftSum, rightSum) + root->val;
+    else if (leftMaxLen > rightMaxLen) return leftSum + root->val;
+    else                               return rightSum + root->val;
+    
+}
+int longestPathSum(BTNode* root) {
+    int maxLen = 0;
+    return longestPathSumUtil(root, maxLen);
+}

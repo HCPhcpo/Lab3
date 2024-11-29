@@ -1,0 +1,7 @@
+int sumDigitPath(BTNode* root, long long sum = 0) {
+    if(root == nullptr) return 0;
+    if(root->left == nullptr && root->right == nullptr) return (sum*10+ root->val) % 27022001;
+    sum = (sum*10) % 27022001;
+    return (sumDigitPath(root->left,sum + root->val)% 27022001 +  sumDigitPath(root->right,sum + root->val)% 27022001)% 27022001;
+    
+}
